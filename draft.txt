@@ -1,0 +1,77 @@
+1. Struktur data
+a. Papan halma
+    Array 2 dimensi dengan elemen integer 0-2 dengan nilai:
+    0: kosong 
+    1: pion player red
+    2: pion player green
+b. Pohon pencarian
+    Pohon pencarian dibuat dengan melakukan rekursif dengan elemen pada
+    masing-masing nodenya berupa objective value state pada node tersebut 
+c. Agen pengguna: Instance class UserAgent
+d. Agen komputer: instance class ComputerAgent
+...
+
+2. Fungsi yang mendeteksi kemenangan Agen
+Suatu agen dikatakan menang jika semua pion agen tersebut berada
+pada rumah lawan.
+
+Misal pada permainan dengan player merah (sebelah kiri) dan player hijau (sebeleh kanan).
+Permainan berakhir jika daerah merah, yaitu pada segitiga yang dibentuk oleh titik
+(1, 1), (1, Bsize/2), dan (Bsize/2, 1) terisi penuh oleh pion hijau (hijau menang) 
+atau daerah hijau, yaitu pada segitiga yang dibentuk titik (Bsize, Bsize), (Bsize/2, Bsize), 
+dan (Bsize, Bsize/2) terisi penuh oleh pion merah (merah menang)
+
+3. Fungsi yang mendeteksi apakah sebuah langkah valid atau tidak
+    
+langkah yang valid:
+- satu langkah ke segala arah tanpa ada pion lain yang menghalangi (move_1)
+- meloncati satu pion ke segala arah (move_2)
+- meloncati beberapa pion dengan setiap langkah hanya meloncati satu pion 
+  ke segala arah (move_3)
+
+Fungsi:
+- Menerima (initX, initY) yang merupakan posisi awal pion sebelum digerakkan
+  dan (moveX, moveY) yang merupakan posisi yang dituju pion 
+- Membuat variable "validMove" yang merupakan list kosong, dan akan diisi dengan
+  seluruh koordinat yang valid
+- Periksa seluruh gerakan yang dapat dilakukan dengan move_1, jika pada
+  koordinat tujuan tidak terdapat pion lain maka push koordinat tersebut
+  ke dalam validMove. Lakukan hal yang sama pada move_2 dan move_3 
+- Periksa apakah (moveX, moveY) ada pada validMove, jika ada (gerakan valid) maka 
+  kembalikan true, jika tidak (gerakan tidak valid) maka kembalikan false
+
+
+4. Objective funtion
+Total jarak terdekat masing-masing pion untuk sampai ke goal
+
+Fungsi:
+- Pilih satu pion, hitung jarak terpendek pion tersebut untuk mencapai goal
+- Lakukan untuk masing-masing pion dan jumlahkan
+
+5. 
+a. Minimax
+
+Fungsi:
+- Menerima parameter state, dan isMaximazing
+- Cek jika permainan selesai
+- Jika permainan selesai, kembalikan nilai yang menandakan permainan berakhir
+- Jika permainan belum selesai,
+    - Cek isMaxizing
+    - Jika isMaximizing == true, cek seluruh gerakan valid yang dapat dilakukan setiap pion
+      pada state tersebut, hitung objective valuenya, dan pilih yang memiliki
+      objective value paling kecil. Jika terdapat beberapa objective value yang sama
+      maka pilih secara random. Selanjutnya lakukan rekursif dengan isMaximizing = false.
+    - Jika isMaximizing == false, cek seluruh gerakan valid yang dapat dilakukan setiap pion
+      pada state tersebut, hitung objective valuenya, dan pilih yang memiliki
+      objective value paling besar. Jika terdapat beberapa objective value yang sama
+      maka pilih secara random. Selanjutnya lakukan rekursif dengan isMaximizing = true
+- Fungsi akan mengembalikan langkah terbaik yang dapat diambil
+
+b. AlphaBeta
+- Menerima parameter state, dan isMaximazing
+- Cek jika permainan selesai
+- Jika permainan selesai, kembalikan nilai yang menandakan permainan berakhir
+- Jika permainan belum selesai,
+    - Cek isMaxizing
+    - Jika isMaximizing == true, 
+...
